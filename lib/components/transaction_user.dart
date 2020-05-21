@@ -24,7 +24,31 @@ class _TransactionUserState extends State<TransactionUser> {
       title: 'Conta de Luz',
       value: 211.30,
       data: DateTime.now()
-    )
+    ),
+    Transaction(
+      id: 't3',
+      title: 'Conta de Agua',
+      value: 211.30,
+      data: DateTime.now()
+    ),
+    Transaction(
+      id: 't4',
+      title: 'Conta de Celular',
+      value: 41.30,
+      data: DateTime.now()
+    ),
+    Transaction(
+      id: 't5',
+      title: 'Fatura do Cartão',
+      value: 2011.30,
+      data: DateTime.now()
+    ),
+    Transaction(
+      id: 't6',
+      title: 'Conta de Telefone',
+      value: 81.30,
+      data: DateTime.now()
+    ),
   ];
 
   _addTransaction(String title, double value){
@@ -51,8 +75,8 @@ class _TransactionUserState extends State<TransactionUser> {
 
     return Column(
       children: [
+        TransactionForm(_addTransaction),
         TransactionList(_transactions),
-        TransactionForm(_addTransaction)
       ],
     );
   }
