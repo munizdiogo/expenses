@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:expenses/components/transaction_form.dart';
 import 'package:expenses/components/transaction_list.dart';
 import 'package:expenses/models/transaction.dart';
@@ -10,7 +12,7 @@ class TransactionUser extends StatefulWidget {
 
 class _TransactionUserState extends State<TransactionUser> {
 
-  final _transaction = [
+  final _transactions = [
     Transaction(
       id: 't1',
       title: 'Novo Tênis de Corrida',
@@ -25,13 +27,32 @@ class _TransactionUserState extends State<TransactionUser> {
     )
   ];
 
+  _addTransaction(String title, double value){
+    final newTransaction = Transaction(
+      id: Random().nextDouble().toString(),
+      title: title,
+      value: value,
+      data: DateTime.now()
+    );
+
+    setState(() {
+      _transactions.add(newTransaction);
+    });
+
+  }
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
 
     return Column(
       children: [
-        TransactionList(_transaction),
-        TransactionForm()
+        TransactionList(_transactions),
+        TransactionForm(_addTransaction)
       ],
     );
   }
