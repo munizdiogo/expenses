@@ -16,63 +16,59 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 20,
-          child: FittedBox(
-            child: Text('${value.toStringAsFixed(2)}'),
-          ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Container(
-          height: 60,
-          width: 10,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 1.0),
-                    color: Color.fromRGBO(220, 220, 200, 1),
-                    borderRadius: BorderRadius.circular(5)),
+    return LayoutBuilder(
+      builder: (ctx, constraints) {
+        return Column(
+          children: [
+            Container(
+              height: constraints.maxHeight * 0.15,
+              child: FittedBox(
+                child: Text('${value.toStringAsFixed(2)}'),
               ),
-              FractionallySizedBox(
-                heightFactor: percentage,
-                child: Container(
-                  decoration: BoxDecoration(
+            ),
+            SizedBox(height: constraints.maxHeight * 0.05),
+            Container(
+              height: constraints.maxHeight * 0.6,
+              width: 10,
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey, width: 1.0),
+                        color: Color.fromRGBO(220, 220, 200, 1),
+                        borderRadius: BorderRadius.circular(5)),
+                  ),
+                  FractionallySizedBox(
+                    heightFactor: percentage,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color:
+                              DateFormat.E().format(DateTime.now())[0] == label
+                                  ? Theme.of(context).primaryColorDark
+                                  : Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(5)),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(height: constraints.maxHeight * 0.05),
+            Container(
+              height: constraints.maxHeight * 0.15,
+              child: FittedBox(
+                child: Text(
+                  '$label',
+                  style: TextStyle(
                       color: DateFormat.E().format(DateTime.now())[0] == label
                           ? Theme.of(context).primaryColorDark
-                          : Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(5)),
+                          : Theme.of(context).primaryColor),
                 ),
-              )
-            ],
-          ),
-        ),
-        // Container(
-        //   margin: EdgeInsets.all(8.0),
-        //   padding: EdgeInsets.all(8.0),
-        //   width: 20,
-        //   height: (100 * value) / total ,
-        //   color: Theme.of(context).primaryColor,
-        //   child: Text('${value / 100}',
-        //   style: TextStyle(
-        //     color: Colors.white,
-        //     fontSize: 6
-        //   ),
-        //   ),
-        // ),
-        Text(
-          '$label',
-          style: TextStyle(
-              color: DateFormat.E().format(DateTime.now())[0] == label
-                  ? Theme.of(context).primaryColorDark
-                  : Theme.of(context).primaryColor),
-        ),
-      ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
