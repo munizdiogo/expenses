@@ -5,6 +5,8 @@ import 'dart:math';
 import 'package:expenses/models/transaction.dart';
 import 'components/transaction_list.dart';
 
+// # TERMINO DO APP - FECHAMENTO DO CAPITULO 4 DO CURSO
+
 main() => runApp(
       ExpensesApp(),
     );
