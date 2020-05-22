@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionForm extends StatefulWidget {
-  final void Function(String, double) onSubmit;
+  final void Function(String, double, DateTime) onSubmit;
 
   TransactionForm(this.onSubmit);
 
@@ -13,7 +13,7 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
-  DateTime _selectDate;
+  DateTime _selectDate = DateTime.now();
 
   _submitForm() {
     final title = _titleController.text;
@@ -22,7 +22,7 @@ class _TransactionFormState extends State<TransactionForm> {
     if (title.isEmpty || value <= 0) {
       return;
     }
-    widget.onSubmit(title, value);
+    widget.onSubmit(title, value, _selectDate);
   }
 
   _showDatePicker() {
@@ -73,7 +73,7 @@ class _TransactionFormState extends State<TransactionForm> {
                   FlatButton(
                     textColor: Theme.of(context).primaryColor,
                     child: Text(
-                      _selectDate == null ? 'Selecionar Data' : 'Alterar Data',
+                      'Alterar Data',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     onPressed: _showDatePicker,
