@@ -43,15 +43,13 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15),
-            topRight: Radius.circular(15),
-          )),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
+    return SingleChildScrollView(
+          child: Container(
+        padding: EdgeInsets.only(
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: 50 + MediaQuery.of(context).viewInsets.bottom),
         child: Column(
           children: [
             TextField(

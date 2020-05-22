@@ -54,12 +54,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
-        backgroundColor: Colors.transparent,
-        barrierColor: Color.fromARGB(80, 128, 20,
-            128), // Implementação de Sombreamento na tela de background.
+        enableDrag: true,
+        barrierColor: Color.fromARGB(80, 128, 20, 128),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
         context: context,
         builder: (_) {
-          return Center(child: TransactionForm(_addTransaction));
+          return TransactionForm(_addTransaction);
         });
   }
 
@@ -94,15 +95,15 @@ class _MyHomePageState extends State<MyHomePage> {
         style: TextStyle(fontFamily: 'OpenSans'),
       ),
       actions: [
-        if(isLandscape)
-        IconButton(
-          icon: Icon(_showChart ? Icons.list : Icons.insert_chart),
-          onPressed: () {
-            setState(() {
-              _showChart = !_showChart;
-            });
-          },
-        ),
+        if (isLandscape)
+          IconButton(
+            icon: Icon(_showChart ? Icons.list : Icons.insert_chart),
+            onPressed: () {
+              setState(() {
+                _showChart = !_showChart;
+              });
+            },
+          ),
         IconButton(
           icon: Icon(Icons.add),
           onPressed: () => _openTransactionFormModal(context),
@@ -121,19 +122,19 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // if (isLandscape)
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Text('Exibir Gráfico'),
-                //     Switch(
-                //         value: _showChart,
-                //         onChanged: (value) {
-                //           setState(() {
-                //             _showChart = value;
-                //           });
-                //         }),
-                //   ],
-                // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Text('Exibir Gráfico'),
+              //     Switch(
+              //         value: _showChart,
+              //         onChanged: (value) {
+              //           setState(() {
+              //             _showChart = value;
+              //           });
+              //         }),
+              //   ],
+              // ),
               if (_showChart || !isLandscape)
                 Container(
                   height: availableHeight * (isLandscape ? 0.7 : 0.30),
