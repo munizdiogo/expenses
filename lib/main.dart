@@ -5,9 +5,7 @@ import 'dart:math';
 import 'package:expenses/models/transaction.dart';
 import 'components/transaction_list.dart';
 
-main() => runApp(
-      ExpensesApp(),
-    );
+main() => runApp(ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
   @override
@@ -57,7 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
-        barrierColor: Color.fromARGB(80, 128, 20, 128), // Implementação de Sombreamento na tela de background.
+        barrierColor: Color.fromARGB(80, 128, 20,
+            128), // Implementação de Sombreamento na tela de background.
         context: context,
         builder: (_) {
           return Center(child: TransactionForm(_addTransaction));
@@ -86,16 +85,28 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     final appBar = AppBar(
       title: Text(
         'Despesas Pessoais',
         style: TextStyle(fontFamily: 'OpenSans'),
       ),
       actions: [
+        if(isLandscape)
+        IconButton(
+          icon: Icon(_showChart ? Icons.list : Icons.insert_chart),
+          onPressed: () {
+            setState(() {
+              _showChart = !_showChart;
+            });
+          },
+        ),
         IconButton(
           icon: Icon(Icons.add),
           onPressed: () => _openTransactionFormModal(context),
-        )
+        ),
       ],
     );
 
@@ -109,29 +120,30 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Exibir Gráfico'),
-                  Switch(
-                      value: _showChart,
-                      onChanged: (value) {
-                        setState(() {
-                          _showChart = value;
-                        });
-                      }),
-                ],
-              ),
-              if(_showChart) 
-               Container(
-                height: availableHeight * 0.30,
-                child: Chart(_recentTransactions),
-              ),
-              if(!_showChart)
-               Container(
-                height: availableHeight * 0.70,
-                child: TransactionList(_transactions, _removeTransactin),
-              ),
+              // if (isLandscape)
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Text('Exibir Gráfico'),
+                //     Switch(
+                //         value: _showChart,
+                //         onChanged: (value) {
+                //           setState(() {
+                //             _showChart = value;
+                //           });
+                //         }),
+                //   ],
+                // ),
+              if (_showChart || !isLandscape)
+                Container(
+                  height: availableHeight * (isLandscape ? 0.7 : 0.30),
+                  child: Chart(_recentTransactions),
+                ),
+              if (!_showChart || !isLandscape)
+                Container(
+                  height: availableHeight * 0.70,
+                  child: TransactionList(_transactions, _removeTransactin),
+                ),
             ],
           ),
         ),
