@@ -5,8 +5,6 @@ import 'dart:math';
 import 'package:expenses/models/transaction.dart';
 import 'components/transaction_list.dart';
 
-// # TERMINO DO APP - FECHAMENTO DO CAPITULO 4 DO CURSO
-
 main() => runApp(
       ExpensesApp(),
     );
@@ -57,9 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
+        backgroundColor: Colors.transparent,
         context: context,
         builder: (_) {
-          return TransactionForm(_addTransaction);
+          return Center(child: TransactionForm(_addTransaction));
         });
   }
 
@@ -85,25 +84,37 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text(
+        'Despesas Pessoais',
+        style: TextStyle(fontFamily: 'OpenSans'),
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _openTransactionFormModal(context),
+        )
+      ],
+    );
+
+    final availableHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Despesas Pessoais',
-            style: TextStyle(fontFamily: 'OpenSans'),
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () => _openTransactionFormModal(context),
-            )
-          ],
-        ),
+        appBar: appBar,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Chart(_recentTransactions),
-              TransactionList(_transactions, _removeTransactin),
+              Container(
+                height: availableHeight * 0.3,
+                child: Chart(_recentTransactions),
+              ),
+              Container(
+                height: availableHeight * 0.7,
+                child: TransactionList(_transactions, _removeTransactin),
+              ),
             ],
           ),
         ),

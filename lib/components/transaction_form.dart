@@ -43,7 +43,14 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
+      margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          )),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(

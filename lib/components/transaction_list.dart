@@ -10,31 +10,29 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 400,
-      child: transactions.isEmpty
-          ? Column(
-              children: [
-                SizedBox(height: 20),
-                Text(
-                  'Nenhuma Transação Cadastrada!',
-                  style: Theme.of(context).textTheme.headline6,
+    return transactions.isEmpty
+        ? Column(
+            children: [
+              SizedBox(height: 20),
+              Text(
+                'Nenhuma Transação Cadastrada!',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              SizedBox(height: 20),
+              Container(
+                height: 200,
+                child: Image.asset(
+                  'assets/images/waiting.png',
+                  fit: BoxFit.cover,
                 ),
-                SizedBox(height: 20),
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
-            )
-          : ListView.builder(
-              itemCount: transactions.length,
-              itemBuilder: (ctx, index) {
-                final tr = transactions[index];
-                return Card(
+              )
+            ],
+          )
+        : ListView.builder(
+            itemCount: transactions.length,
+            itemBuilder: (ctx, index) {
+              final tr = transactions[index];
+              return Card(
                   elevation: 6,
                   margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                   child: ListTile(
@@ -53,14 +51,14 @@ class TransactionList extends StatelessWidget {
                     ),
                     subtitle: Text(DateFormat('d MMM y').format(tr.data)),
                     trailing: IconButton(
-                      icon: Icon(Icons.delete,
-                      color: Theme.of(context).errorColor,
+                      icon: Icon(
+                        Icons.delete,
+                        color: Theme.of(context).errorColor,
+                      ),
+                      onPressed: () => onRemove(tr.id),
                     ),
-                    onPressed: () => onRemove(tr.id),
-                  ),
-                ));
-              },
-            ),
-    );
+                  ));
+            },
+          );
   }
 }
