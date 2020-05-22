@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
-        barrierColor: Color.fromARGB(80, 128, 20, 128),
+        barrierColor: Color.fromARGB(80, 128, 20, 128), // Implementação de Sombreamento na tela de background.
         context: context,
         builder: (_) {
           return Center(child: TransactionForm(_addTransaction));
