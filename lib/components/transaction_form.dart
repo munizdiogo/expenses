@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 class TransactionForm extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
 
-  TransactionForm(this.onSubmit);
+  const TransactionForm(this.onSubmit);
 
   @override
   _TransactionFormState createState() => _TransactionFormState();
@@ -43,6 +43,9 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
+
+    ThemeData _theme = Theme.of(context);
+
     return SingleChildScrollView(
           child: Container(
         padding: EdgeInsets.only(
@@ -58,9 +61,9 @@ class _TransactionFormState extends State<TransactionForm> {
             ),
             TextField(
               controller: _valueController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
               onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(labelText: 'Valor (R\$)'),
+              decoration: const InputDecoration(labelText: 'Valor (R\$)'),
             ),
             Container(
               height: 70,
@@ -74,8 +77,8 @@ class _TransactionFormState extends State<TransactionForm> {
                     ),
                   ),
                   FlatButton(
-                    textColor: Theme.of(context).primaryColor,
-                    child: Text(
+                    textColor: _theme.primaryColor,
+                    child: const Text(
                       'Alterar Data',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
@@ -88,9 +91,9 @@ class _TransactionFormState extends State<TransactionForm> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 RaisedButton(
-                  child: Text('Nova Transação'),
-                  color: Theme.of(context).primaryColor,
-                  textColor: Theme.of(context).textTheme.button.color,
+                  child: const Text('Nova Transação'),
+                  color: _theme.primaryColor,
+                  textColor: _theme.textTheme.button.color,
                   onPressed: _submitForm,
                 ),
               ],

@@ -17,7 +17,7 @@ class ExpensesApp extends StatelessWidget {
         accentColor: Colors.amber,
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
-            headline6: TextStyle(
+            headline6: const TextStyle(
                 fontFamily: 'OpenSans',
                 fontSize: 18,
                 fontWeight: FontWeight.bold),
@@ -25,7 +25,7 @@ class ExpensesApp extends StatelessWidget {
                 color: Colors.purple[100], fontWeight: FontWeight.bold)),
         appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
-                  headline6: TextStyle(
+                  headline6: const TextStyle(
                       fontFamily: 'OpenSans',
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
     bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     final appBar = AppBar(
-      title: Text(
+      title: const Text(
         'Despesas Pessoais',
         style: TextStyle(fontFamily: 'OpenSans'),
       ),
@@ -141,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               if (!_showChart || !isLandscape)
                 Container(
-                  height: availableHeight *  (isLandscape ? 1 : 0.7),
+                  height: availableHeight * (isLandscape ? 1 : 0.7),
                   child: TransactionList(_transactions, _removeTransactin),
                 ),
             ],
