@@ -48,8 +48,7 @@ class _TransactionFormState extends State<TransactionForm> {
         padding: EdgeInsets.only(
             left: 10,
             right: 10,
-            top: 10,
-            bottom: 50 + MediaQuery.of(context).viewInsets.bottom),
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom),
         child: Column(
           children: [
             TextField(
@@ -71,7 +70,7 @@ class _TransactionFormState extends State<TransactionForm> {
                     child: Text(
                       _selectDate == null
                           ? 'Nenhuma data selecionada'
-                          : 'Data selecinada: ${DateFormat('dd/MM/y').format(_selectDate)}',
+                          : 'Data Selecinada: ${DateFormat('dd/MM/y').format(_selectDate)}',
                     ),
                   ),
                   FlatButton(
@@ -95,7 +94,7 @@ class _TransactionFormState extends State<TransactionForm> {
                   onPressed: _submitForm,
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
